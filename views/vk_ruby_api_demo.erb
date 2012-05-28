@@ -1,0 +1,72 @@
+<%
+
+  # демо примеры находятся в папке 'views/api_demo/'
+
+  # метод для отображения кода-примера
+  # в параметры передаётся заголовок, название функции для ссылки на ВКонтакте API,
+  # название файла в котором содержится рабочий код, и код для спана (определяется ширину - 4, 8 в 12 разрядной сетке)
+  # файлы хранятся в папке views/api_demo/ в функции происходит получение содержимого файла
+  # преобразование содержимого к html безопасному отображению - и отображение,
+  # и далее парсинг через Erb (EmbeddedRuby) - для получения результата, который ниже и отображается
+
+  def show_api(title, doc_name, erb_file, span_class='span8')
+    file_path = File.join("views", "api_demo", erb_file)
+    erb_content = File.read(file_path)
+    erb_content_escaped = Rack::Utils.escape_html(erb_content)
+    str =  '<div class="'+span_class+'">'+"\n"
+    str += '  <h2>'+title+'</h2>'+"\n"
+    str += '  <p>'+"\n"
+    str += '    <pre>'+ erb_content_escaped +'</pre>'+"\n"
+    result = erb(erb_content)
+    str += 'Результат: ' + result.to_s + "\n"
+    str += '  </p>' + "\n"
+    str += '  <p><a class="btn" target="_blank" href="http://vk.com/developers.php?o=-1&p='+ doc_name +'">API документация &raquo;</a></p>'+"\n"
+    str += '</div><!--/span-->' +"\n"
+  end
+
+%>
+
+  <div class="subnav">
+    <ul class="nav nav-pills">
+<!--      <li><a href="#users">Пользователи</a></li> -->
+      <li><a href="#friends">Друзья</a></li>
+<!--      <li><a href="#groups">Группы</a></li> -->
+      <li><a href="#photos">Фотографии</a></li>
+      <li><a href="#wall">Стена</a></li>
+      <li><a href="#audio">Аудиозаписи</a></li>
+<!--      <li><a href="#video">Видеозаписи</a></li> -->
+    </ul>
+  </div>
+
+<section id="friends">
+<div class="row-fluid">
+  <%= show_api('Список друзей', 'friends.get', 'friends.get.erb') %>
+</div><!--/row-->
+</section>
+
+<section id="photos">
+
+<div class="row-fluid">
+  <%= show_api('Альбомы', 'photos.getAlbums', 'photos.getAlbums.erb') %>
+</div><!--/row-->
+
+<div class="row-fluid">
+<%= show_api('Фотографии', 'photos.get', 'photos.get.erb') %>
+</div><!--/row-->
+
+</section>
+
+<section id="wall">
+<div class="row-fluid">
+  <%= show_api('Записи на стене', 'wall.get', 'wall.get.erb') %>
+</div><!--/row-->
+</section>
+
+<section id="audio">
+<div class="row-fluid">
+  <%= show_api('Список аудиозаписей', 'audio.get', 'audio.get.erb') %>
+</div><!--/row-->
+</section>
+
+
+

@@ -1,0 +1,11 @@
+<%
+  # фотографии в альбоме
+  @albums = @app.photos.getAlbums(:count=>1)
+  if @albums.size == 1
+  @photos = @app.photos.get(:aid => @albums[0]['aid'], :count=>7)
+%>
+Фотографии в альбоме: <br />
+<% @photos.each do |photo| %>
+ <img src="<%= photo['src_small'] %>">
+<% end %>
+<% end %>

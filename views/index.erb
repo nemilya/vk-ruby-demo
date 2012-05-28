@@ -1,0 +1,22 @@
+<div class="row-fluid">
+  <!-- without left menu -->
+  <% # erb :left_menu%> 
+
+  <div class="span12"> <!-- use 'span9' with left menu -->
+    <div class="hero-unit">
+      <h1>ВКонтакте демо</h1>
+      <p>Пример авторизации через аккаунт в системе ВК, и пример использования Open API (на базе <a href="https://github.com/zinenko/vk-ruby">vk-ruby</a>).</p>
+
+      <p>
+        <% if session[:token] %>
+          <a class="btn btn-primary btn-large" href="/logout">Выйти</a>
+        <% else %>
+          <a class="btn btn-primary btn-large" href="/auth/vkontakte">Войти через аккаунт VK &raquo;</a>
+        <% end %>
+      </p>
+    </div>
+    <% if @app %>
+      <%= erb :vk_ruby_api_demo %>
+    <% end %>
+  </div><!--/span-->
+</div><!--/row-->

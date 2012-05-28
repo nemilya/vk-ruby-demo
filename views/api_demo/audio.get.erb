@@ -1,0 +1,5 @@
+<ul>
+<% @app.audio.get(:count=>7).each do |audio| %>
+  <li><b><%= audio['artist'] %></b>: <%= audio['title'] %></li>
+<% end %>
+</ul>

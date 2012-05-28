@@ -1,0 +1,9 @@
+<%
+  @albums = @app.photos.getAlbums(:count=>7)
+%>
+Альбомы: <br />
+<ul>
+<% @albums.each do |album| %>
+ <li><%= album['title'] %></li>
+<% end %>
+</ul>

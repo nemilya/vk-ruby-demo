@@ -1,0 +1,5 @@
+<ul>
+<% @app.friends.get(:fields=>"first_name,last_name", :count=>7).each do |friend| %>
+  <li><%= friend['first_name'] %> <%= friend['last_name'] %></li>
+<% end %>
+</ul>

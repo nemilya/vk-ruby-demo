@@ -1,0 +1,12 @@
+<%
+  @wall_items = @app.wall.get(:count=>7)
+  # первым элементом идёт количество записей
+  cnt = @wall_items.shift
+%>
+Количество записей на стене: <%= cnt %><br />
+Записи:
+<ul>
+<% @wall_items.each do |wall_item| %>
+ <li><%= wall_item['text'] %></li>
+<% end %>
+</ul>
