@@ -32,4 +32,4 @@
 
     bindle exec ruby app.rb  -o localhost.vcap.me -p 3000
 
-Подробнее о настройке локального тестирования читайте в https://github.com/nemilya/vk-demo/blob/master/README.md
+Подробнее о настройке локального тестирования читайте здесь https://github.com/nemilya/vk-demo/blob/master/README.md
